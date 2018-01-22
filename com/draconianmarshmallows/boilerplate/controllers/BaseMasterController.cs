@@ -10,8 +10,8 @@ namespace com.draconianmarshmallows.boilerplate.controllers
         private static BaseMasterController mInstance;
 
         [Header("Level Information")]
-        [SerializeField] string levelsDirectoryPath;
-        [SerializeField] string[] levelSceneNames;
+        [SerializeField] private string levelsDirectoryPath;
+        [SerializeField] private string[] levelSceneNames;
 
         [Header("UI Hooks")]
         [SerializeField] GameObject startMenu;
@@ -35,6 +35,11 @@ namespace com.draconianmarshmallows.boilerplate.controllers
         public void startGame()
         {
             startMenu.SetActive(false);
+
+            #if UNITY_EDITOR
+            SceneManager.UnloadSceneAsync(levelsDirectoryPath + levelSceneNames[0]);
+            #endif
+
             SceneManager.LoadScene(levelsDirectoryPath + levelSceneNames[0], 
                 LoadSceneMode.Additive);
         }
