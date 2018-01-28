@@ -11,9 +11,12 @@ namespace com.draconianmarshmallows.boilerplate.controllers
 
         protected virtual void Start()
         {
-            BaseMasterController.instance.onLevelStarted(this);
+            BaseMasterController.instance.onLevelInstanciated(this);
+        }
+
+        public virtual void startLevel()
+        {
             reset();
-            startLevel();
         }
 
         protected virtual void reset()
@@ -25,7 +28,5 @@ namespace com.draconianmarshmallows.boilerplate.controllers
         {
             resetting = false;
         }
-
-        protected virtual void startLevel() { }
     }
 }

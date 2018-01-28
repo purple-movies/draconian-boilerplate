@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace com.draconianmarshmallows.boilerplate.controllers
 {
-    public abstract class BaseMasterController : MonoBehaviour
+    public abstract class BaseMasterController : DraconianBehaviour
     {
         public static BaseMasterController instance { get { return mInstance; } }
         private static BaseMasterController mInstance;
@@ -22,32 +23,37 @@ namespace com.draconianmarshmallows.boilerplate.controllers
 
         private BaseLevelController currentLevelController;
 
-        protected virtual void Awake()
+        protected override void Awake()
         {
             if (mInstance) Destroy(gameObject);
             mInstance = this;
         }
 
-        protected virtual void Start()
-        {
-        }
-
         public void startGame()
         {
             startMenu.SetActive(false);
+            string levelPath = levelsDirectoryPath + levelSceneNames[0];
 
             #if UNITY_EDITOR
-            SceneManager.UnloadSceneAsync(levelsDirectoryPath + levelSceneNames[0]);
+            try { SceneManager.UnloadSceneAsync(levelPath); }
+            catch (ArgumentException ignore) { }
             #endif
 
-            SceneManager.LoadScene(levelsDirectoryPath + levelSceneNames[0], 
-                LoadSceneMode.Additive);
+            StartCoroutine(loadLevel(levelPath));
         }
 
-        public virtual void onLevelStarted(BaseLevelController levelController)
+        private IEnumerator loadLevel(string levelPath)
+        {
+            var result = SceneManager.LoadSceneAsync(levelPath, LoadSceneMode.Additive);
+            while ( ! result.isDone) yield return new WaitForEndOfFrame();
+            
+            SceneManager.SetActiveScene(SceneManager.GetSceneByPath(levelPath));
+            currentLevelController.startLevel();
+        }
+
+        public virtual void onLevelInstanciated(BaseLevelController levelController)
         {
             currentLevelController = levelController;
-            //Debug.Log("level started !");
         }
     }
 }
