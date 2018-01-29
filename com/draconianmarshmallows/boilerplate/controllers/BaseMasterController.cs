@@ -55,5 +55,7 @@ namespace com.draconianmarshmallows.boilerplate.controllers
         {
             currentLevelController = levelController;
         }
+
+        public abstract void onLevelCompleted(bool levelWon);
     }
 }

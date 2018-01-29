@@ -1,6 +1,4 @@
 ﻿using com.draconianmarshmallows.boilerplate.controllers;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace com.draconianmarshmallows.boilerplate.example
@@ -10,6 +8,12 @@ namespace com.draconianmarshmallows.boilerplate.example
         override protected void Awake()
         {
             base.Awake();
+        }
+
+        public override void onLevelCompleted(bool levelWon)
+        {
+            if (levelWon) Debug.Log("won level !!!!");
+            else Debug.Log("level failed !");
         }
     }
 }

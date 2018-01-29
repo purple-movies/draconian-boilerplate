@@ -7,11 +7,13 @@ namespace com.draconianmarshmallows.boilerplate.controllers
 {
     public abstract class BaseLevelController : MonoBehaviour
     {
+        protected BaseMasterController masterController;
         protected bool resetting;
 
         protected virtual void Start()
         {
-            BaseMasterController.instance.onLevelInstanciated(this);
+            masterController = BaseMasterController.instance;
+            masterController.onLevelInstanciated(this);
         }
 
         public virtual void startLevel()
