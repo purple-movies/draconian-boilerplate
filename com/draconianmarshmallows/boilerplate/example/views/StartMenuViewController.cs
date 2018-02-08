@@ -18,7 +18,7 @@ namespace com.draconianmarshmallows.boilerplate.example.views
 
         private void onClickStart()
         {
-            BaseMasterController.instance.startGame();
+            BaseMasterController.instance.StartGame();
         }
     }
 }

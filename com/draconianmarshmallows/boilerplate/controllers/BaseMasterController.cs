@@ -29,7 +29,7 @@ namespace com.draconianmarshmallows.boilerplate.controllers
             mInstance = this;
         }
 
-        public void startGame()
+        public void StartGame()
         {
             startMenu.SetActive(false);
             string levelPath = levelsDirectoryPath + levelSceneNames[0];
@@ -56,6 +56,6 @@ namespace com.draconianmarshmallows.boilerplate.controllers
             currentLevelController = levelController;
         }
 
-        public abstract void onLevelCompleted(bool levelWon);
+        public abstract void OnLevelCompleted(bool levelWon);
     }
 }
