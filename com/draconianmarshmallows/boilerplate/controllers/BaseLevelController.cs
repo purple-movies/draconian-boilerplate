@@ -5,12 +5,16 @@ using UnityEngine;
 
 namespace com.draconianmarshmallows.boilerplate.controllers
 {
-    public abstract class BaseLevelController : MonoBehaviour
+    public abstract class BaseLevelController : DraconianBehaviour
     {
+        [SerializeField] private BasePlayerController player;
+
         protected BaseMasterController masterController;
         protected bool resetting;
 
-        protected virtual void Start()
+        public BasePlayerController Player { get { return player; } }
+
+        protected override void Start()
         {
             masterController = BaseMasterController.instance;
             masterController.onLevelInstanciated(this);

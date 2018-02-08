@@ -15,7 +15,8 @@ namespace com.draconianmarshmallows.boilerplate.controllers
         [SerializeField] private string[] levelSceneNames;
 
         [Header("UI Hooks")]
-        [SerializeField] GameObject startMenu;
+        [SerializeField] private BaseUIController uiController;
+        [SerializeField] private GameObject startMenu;
 
         //[Header("Debug Options")]
         //[SerializeField] bool sceneDebugMode;
@@ -49,6 +50,7 @@ namespace com.draconianmarshmallows.boilerplate.controllers
             
             SceneManager.SetActiveScene(SceneManager.GetSceneByPath(levelPath));
             currentLevelController.startLevel();
+            uiController.OnLevelStarted(currentLevelController);
         }
 
         public virtual void onLevelInstanciated(BaseLevelController levelController)
