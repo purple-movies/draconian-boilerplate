@@ -6,5 +6,5 @@ using System.Text;
 namespace com.draconianmarshmallows.boilerplate.controllers
 {
     // NOTE(ASH): Adding this as a placeholder - could probably be a generic-object. 
-    public class BasePlayerController { }
+    public class BasePlayerController : DraconianBehaviour { }
 }
