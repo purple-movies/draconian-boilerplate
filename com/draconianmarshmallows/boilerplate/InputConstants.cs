@@ -8,5 +8,6 @@ namespace com.draconianmarshmallows.boilerplate
     {
         public const string HORIZONTAL = "Horizontal";
         public const string JUMP = "Jump";
+        public const string FIRE_1 = "Fire1";
     }
 }
