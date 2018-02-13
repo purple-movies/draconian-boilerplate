@@ -7,12 +7,12 @@ namespace com.draconianmarshmallows.boilerplate.controllers
 {
     public abstract class BaseLevelController : DraconianBehaviour
     {
-        [SerializeField] private BasePlayerController player;
+        [SerializeField] private BasePlayerController playerController;
 
         protected BaseMasterController masterController;
         protected bool resetting;
 
-        public BasePlayerController Player { get { return player; } }
+        public BasePlayerController Player { get { return playerController; } }
 
         protected override void Start()
         {
