@@ -7,5 +7,6 @@ namespace com.draconianmarshmallows.boilerplate
     public class InputConstants
     {
         public const string HORIZONTAL = "Horizontal";
+        public const string JUMP = "Jump";
     }
 }
