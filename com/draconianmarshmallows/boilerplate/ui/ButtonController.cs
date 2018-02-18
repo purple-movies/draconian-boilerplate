@@ -1,20 +1,35 @@
 ﻿using com.draconianmarshmallows.boilerplate;
-using System.Collections;
-using System.Collections.Generic;
+using com.draconianmarshmallows.boilerplate.managers;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ButtonController : DraconianBehaviour
+[RequireComponent(typeof(EventTrigger))]
+public class ButtonController : DraconianBehaviour, IUpdateable
 {
-    [SerializeField] private Button button;
-    [SerializeField] private EventTrigger eventTrigger;
-
+    public Action onButtonHeld;
+    
+    private bool pointerDown = false;
 
     protected override void Start()
     {
         base.Start();
+        UpdateManager.Instance.AddUpdateable(this);
+    }
 
+    public void OnUpdate()
+    {
+        if (pointerDown) onButtonHeld();
+    }
 
+    public void OnPointerDown()
+    {
+        pointerDown = true;
+    }
+
+    public void OnPointerUp()
+    {
+        pointerDown = false;
     }
 }
