@@ -34,6 +34,8 @@ namespace com.draconianmarshmallows.boilerplate.managers
 
         protected virtual void Update()
         {
+            if (updateableArray == null) return;
+
             for (int i = 0; i < updateableArray.Length; i++)
                 updateableArray[i].OnUpdate();
         }
