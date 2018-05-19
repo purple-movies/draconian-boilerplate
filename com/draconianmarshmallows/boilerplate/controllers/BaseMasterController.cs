@@ -11,7 +11,9 @@ namespace com.draconianmarshmallows.boilerplate.controllers
         private static BaseMasterController mInstance;
 
         [Header("Level Information")]
+        [Tooltip("Set the root of this to your \"Assets\" directory E.G. \"Assets/Scenes/Levels/\".")]
         [SerializeField] private string levelsDirectoryPath;
+        [Tooltip("Remember to add the FULL file name with \".unity\" file extension.")]
         [SerializeField] private string[] levelSceneNames;
 
         [Header("UI Hooks")]
@@ -37,7 +39,10 @@ namespace com.draconianmarshmallows.boilerplate.controllers
 
             #if UNITY_EDITOR
             try { SceneManager.UnloadSceneAsync(levelPath); }
-            catch (ArgumentException ignore) { }
+            catch (ArgumentException exception)
+            {
+                Debug.LogWarning("Couldn't unload previous level: " + exception);
+            }
             #endif
 
             StartCoroutine(loadLevel(levelPath));
@@ -47,7 +52,7 @@ namespace com.draconianmarshmallows.boilerplate.controllers
         {
             var result = SceneManager.LoadSceneAsync(levelPath, LoadSceneMode.Additive);
             while ( ! result.isDone) yield return new WaitForEndOfFrame();
-            
+
             SceneManager.SetActiveScene(SceneManager.GetSceneByPath(levelPath));
             currentLevelController.startLevel();
             uiController.OnLevelStarted(currentLevelController);
